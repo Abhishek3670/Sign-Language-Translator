@@ -9,7 +9,7 @@ if not os.path.exists("data/train"):
     os.makedirs("data/train")
 if not os.path.exists("data/test"):
     os.makedirs("data/test")
-for i in range(3):
+for i in range(10):
     if not os.path.exists("data/train/" + str(i)):
         os.makedirs("data/train/"+str(i))
     if not os.path.exists("data/test/" + str(i)):
@@ -41,10 +41,13 @@ while True:
              'zero': len(os.listdir(directory+"/0")),
              'one': len(os.listdir(directory+"/1")),
              'two': len(os.listdir(directory+"/2")),
-    #          'three': len(os.listdir(directory+"/3")),
-    #          'four': len(os.listdir(directory+"/4")),
-    #          'five': len(os.listdir(directory+"/5")),
-    #          'six': len(os.listdir(directory+"/6")),
+             'three': len(os.listdir(directory+"/3")),
+             'four': len(os.listdir(directory+"/4")),
+             'five': len(os.listdir(directory+"/5")),
+             'six': len(os.listdir(directory+"/6")),
+             'seven': len(os.listdir(directory+"/7")),
+             'eight': len(os.listdir(directory+"/8")),
+             'nine': len(os.listdir(directory+"/9")),
              'a': len(os.listdir(directory+"/A")),
              'b': len(os.listdir(directory+"/B")),
              'c': len(os.listdir(directory+"/C")),
@@ -74,15 +77,19 @@ while True:
              }
     
     # Printing the count in each set to the screen
-    # cv2.putText(frame, "MODE : "+mode, (10, 50), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    # cv2.putText(frame, "IMAGE COUNT", (10, ), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "MODE : "+mode, (10, 50), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "IMAGE COUNT", (10,60 ), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
     cv2.putText(frame, "ZERO : "+str(count['zero']), (10, 70), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
     cv2.putText(frame, "ONE : "+str(count['one']), (10, 80), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
     cv2.putText(frame, "TWO : "+str(count['two']), (10, 90), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    # cv2.putText(frame, "THREE : "+str(count['three']), (10, 180), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    # cv2.putText(frame, "FOUR : "+str(count['four']), (10, 200), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    # cv2.putText(frame, "FIVE : "+str(count['five']), (10, 220), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
-    # cv2.putText(frame, "SIX : "+str(count['six']), (10, 230), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "THREE : "+str(count['three']), (10, 180), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "FOUR : "+str(count['four']), (10, 200), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "FIVE : "+str(count['five']), (10, 220), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "SIX : "+str(count['six']), (10, 230), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "SEVEN : "+str(count['seven']), (10, 240), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "EIGHT : "+str(count['eight']), (10, 250), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+    cv2.putText(frame, "NINE : "+str(count['nine']), (10, 260), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
+        
     cv2.putText(frame, "a : "+str(count['a']), (10, 100), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
     cv2.putText(frame, "b : "+str(count['b']), (10, 110), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
     cv2.putText(frame, "c : "+str(count['c']), (10, 120), cv2.FONT_HERSHEY_PLAIN, 1, (0,255,255), 1)
@@ -125,11 +132,11 @@ while True:
     gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
     
     blur = cv2.GaussianBlur(gray,(5,5),2)
-    # #blur = cv2.bilateralFilter(roi,9,75,75)
+    #blur = cv2.bilateralFilter(roi,9,75,75)
     
     th3 = cv2.adaptiveThreshold(blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,11,2)
     ret, test_image = cv2.threshold(th3, minValue, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
-    #time.sleep(5)
+    # time.sleep(5)
     #cv2.imwrite("/home/rc/Downloads/soe/im1.jpg", roi)
     #test_image = func("/home/rc/Downloads/soe/im1.jpg")
 
@@ -156,7 +163,7 @@ while True:
     ##ret, res = cv2.threshold(th3, minValue, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
     # cv2.imshow("ROI", roi)
     #roi = frame
-    interrupt = cv2.waitKey(10)
+    interrupt = cv2.waitKey(5000)
     if interrupt & 0xFF == 27: # esc key
         break
     if interrupt & 0xFF == ord('0'):
@@ -165,14 +172,20 @@ while True:
         cv2.imwrite(directory+'1/'+str(count['one'])+'.jpg', roi)
     if interrupt & 0xFF == ord('2'):
         cv2.imwrite(directory+'2/'+str(count['two'])+'.jpg', roi)       
-    # if interrupt & 0xFF == ord('3'):
-    #     cv2.imwrite(directory+'3/'+str(count['three'])+'.jpg', roi)
-    # if interrupt & 0xFF == ord('4'):
-    #     cv2.imwrite(directory+'4/'+str(count['four'])+'.jpg', roi)
-    # if interrupt & 0xFF == ord('5'):
-    #     cv2.imwrite(directory+'5/'+str(count['five'])+'.jpg', roi)
-    # if interrupt & 0xFF == ord('6'):
-    #     cv2.imwrite(directory+'6/'+str(count['six'])+'.jpg', roi)
+    if interrupt & 0xFF == ord('3'):
+        cv2.imwrite(directory+'3/'+str(count['three'])+'.jpg', roi)
+    if interrupt & 0xFF == ord('4'):
+        cv2.imwrite(directory+'4/'+str(count['four'])+'.jpg', roi)
+    if interrupt & 0xFF == ord('5'):
+        cv2.imwrite(directory+'5/'+str(count['five'])+'.jpg', roi)
+    if interrupt & 0xFF == ord('6'):
+        cv2.imwrite(directory+'6/'+str(count['six'])+'.jpg', roi)
+    if interrupt & 0xFF == ord('7'):
+        cv2.imwrite(directory+'7/'+str(count['seven'])+'.jpg', roi)
+    if interrupt & 0xFF == ord('8'):
+        cv2.imwrite(directory+'8/'+str(count['eight'])+'.jpg', roi)
+    if interrupt & 0xFF == ord('9'):
+        cv2.imwrite(directory+'9/'+str(count['nine'])+'.jpg', roi)
     if interrupt & 0xFF == ord('a'):
         cv2.imwrite(directory+'A/'+str(count['a'])+'.jpg', roi)
     if interrupt & 0xFF == ord('b'):
